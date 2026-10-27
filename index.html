@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Model Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-compound-drag-and-drop@1.1.0/cytoscape-compound-drag-and-drop.js"></script>
+    <script src="https://unpkg.com/cytoscape-cxtmenu@3.5.0/cytoscape-cxtmenu.js"></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="wordmark" href="./">
+            <span class="brand-mark">M</span>
+            <span>MODEL EDITOR</span>
+        </a>
+        <div id="status" data-state="loading" role="status">Loading sample model…</div>
+    </header>
+    <main>
+        <section class="intro">
+            <div>
+                <p class="eyebrow">INTERACTIVE GRAPH WORKSPACE</p>
+                <h1>WMC <em>editor</em></h1>
+                <p class="lede">Edit nodes, relationships, allocations, and every field in your model.</p>
+            </div>
+            <div class="top-actions">
+                <input id="file-input" type="file" accept=".json,application/json" hidden>
+                <button id="open-file" class="button secondary" type="button">Open JSON</button>
+                <button id="run-simulation" class="button secondary" type="button" hidden disabled>Run WMC simulation</button>
+                <a id="view-results" class="button primary" target="_blank" rel="noopener" hidden>View simulation results</a>
+                <button id="download" class="button primary" type="button">Download JSON</button>
+            </div>
+        </section>
+
+        <section class="toolbar" aria-label="Graph actions">
+            <div class="toolbar-group">
+                <button id="add-node" class="button secondary" type="button">Add function</button>
+                <button id="add-agent" class="button secondary" type="button">Add agent</button>
+                <button id="add-edge" class="button secondary" type="button">Connect selected nodes</button>
+                <button id="delete-selected" class="button danger" type="button">Delete selected</button>
+            </div>
+            <p class="hint">Drag work functions into agent groups to change allocation. Select two nodes to connect them.</p>
+        </section>
+
+        <section class="workspace">
+            <section class="graph-panel" aria-label="Model graph">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">GRAPH</p>
+                        <h2>Model structure</h2>
+                    </div>
+                    <p id="selection" class="selection">Select a node, edge, or agent in the graph.</p>
+                </div>
+                <div id="graph" role="img" aria-label="Interactive graph of the model"></div>
+                <div class="legend">
+                    <span><i class="legend-function"></i> Work function</span>
+                    <span><i class="legend-resource"></i> Resource</span>
+                    <span><i class="legend-agent"></i> Agent allocation target</span>
+                </div>
+            </section>
+
+            <section class="json-panel" aria-label="Model JSON editor">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">SOURCE DATA</p>
+                        <h2>Full JSON</h2>
+                    </div>
+                    <button id="format-json" class="text-button" type="button">Format</button>
+                </div>
+                <p class="json-help">Edit any model field here, including node and agent metadata, then apply your changes to the graph.</p>
+                <textarea id="json-editor" spellcheck="false" aria-label="Model JSON"></textarea>
+                <div class="json-actions">
+                    <button id="apply-json" class="button primary" type="button">Apply JSON</button>
+                </div>
+            </section>
+        </section>
+        <footer>MODEL DATA STAYS IN YOUR BROWSER <span>·</span> DOWNLOAD TO SAVE YOUR CHANGES</footer>
+    </main>
+    <dialog id="value-dialog" aria-labelledby="value-dialog-title">
+        <form id="value-form">
+            <p class="eyebrow">MODEL VALUE</p>
+            <h2 id="value-dialog-title"></h2>
+            <label id="value-label" for="value-input"></label>
+            <input id="value-input" type="number" required>
+            <p id="value-help" class="dialog-help"></p>
+            <div class="dialog-actions">
+                <button class="button secondary" type="button" data-close-dialog>Cancel</button>
+                <button class="button primary" type="submit">Save value</button>
+            </div>
+        </form>
+    </dialog>
+    <script src="app.js"></script>
+</body>
+</html>

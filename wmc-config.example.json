@@ -1,0 +1,14 @@
+{
+  "wmc_dir": "../path-to-wmc",
+  "executable": "build/CHIMP",
+  "runs_dir": "Results/runs",
+  "nodes": {
+    "ExampleAction": "DistributedWorkFunction",
+    "ExampleResource": "BaseEnvironmentResource"
+  },
+  "agents": [
+    "ExampleAgent"
+  ],
+  "trace_file": "actionTrace.json",
+  "metrics_file": "metrics.json"
+}

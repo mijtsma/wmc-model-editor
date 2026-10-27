@@ -1,0 +1,36 @@
+{
+  "GraphData": {
+    "Nodes": {
+      "ExampleAction": {
+        "Type": "DistributedWorkFunction",
+        "UserData": {
+          "FullName": "Example action",
+          "Duration": 1
+        }
+      },
+      "ExampleResource": {
+        "Type": "BaseEnvironmentResource",
+        "UserData": {
+          "FullName": "Example resource",
+          "Duration": 0
+        }
+      }
+    },
+    "Edges": [
+      {
+        "Source": "ExampleAction",
+        "Target": "ExampleResource",
+        "UserData": {
+          "QOS": ""
+        }
+      }
+    ],
+    "Agents": {
+      "ExampleAgent": {
+        "Authority": [
+          "ExampleAction"
+        ]
+      }
+    }
+  }
+}
